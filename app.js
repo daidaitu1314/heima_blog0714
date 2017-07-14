@@ -15,6 +15,10 @@ app.set('views', './views');
 var indexRouter = require('./router/indexRouter.js');
 // 注册路由
 app.use(indexRouter);
+// 导入 userRouter 模块
+var userRouter = require('./router/userRouter.js');
+// 注册路由
+app.use(userRouter);
 
 app.listen(3008, function () {
   console.log('http://127.0.0.1:3008');
