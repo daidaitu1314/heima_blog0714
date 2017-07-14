@@ -72,9 +72,22 @@ module.exports = {
       });
 
       // 登录成功：
+      // 在将登录结果返回给浏览器之间，需要先将登录 状态 和 登录用户信息保存到 session中
+      // console.log(req.session);
+      // 将登录成功的状态保存到 session 中
+      req.session.islogin = true;
+      // 将登录人的信息对象，保存到 session 中
+      req.session.user = results[0];
+      // 把登录的结果返回给客户端
       res.json({
         err_code: 0
       });
+    });
+  },
+  logout(req, res) { // 注销登录
+    req.session.destroy((err) => {
+      if (err) throw err;
+      res.redirect('/login');
     });
   }
 }

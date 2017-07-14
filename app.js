@@ -15,6 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // 导入 session 中间件
 var session = require('express-session');
+// 注册 Session 中间件
+app.use(session({
+  secret: '这是一个加密的盐',
+  resave: false, // 强制session保存到session store中【session默认是在内存中的，其实也可以保存到数据库中】
+  saveUninitialized: false // 强制没有“初始化”的session保存到storage中【创建了session但是并没有修改这个session，就叫做未初始化】
+}));
 
 // 指定 express 的默认模板引擎
 app.set('view engine', 'ejs');

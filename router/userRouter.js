@@ -10,5 +10,6 @@ router
   .get('/login', userCtrl.showLoginPage) // 展示登录页面
   .post('/register', userCtrl.registerNewUser) // 注册新用户
   .post('/login', userCtrl.login) // 用户登录
+  .get('/logout', userCtrl.logout) // 注销登录
 
 module.exports = router;
