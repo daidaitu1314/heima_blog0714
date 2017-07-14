@@ -45,6 +45,30 @@
   </form>
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $('#form').on('submit', function (e) {
+        e.preventDefault();
+
+        // 手动发起Ajax提交表单
+        $.ajax({
+          url: '/register',
+          data: $(this).serialize(),
+          type: 'post',
+          dataType: 'json',
+          success: function (results) {
+            // 规定服务器返回的 数据是JSON对象  { err_code:0, msg:'错误消息' } // 0表示未出错
+            // console.log(results);
+            if (results.err_code === 0) {
+              location.href = '/login'; // 跳转到登录页面
+            } else {
+              alert(results.msg);
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

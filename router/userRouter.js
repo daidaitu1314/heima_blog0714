@@ -8,5 +8,6 @@ var userCtrl = require('../controller/userCtrl.js');
 router
 .get('/register', userCtrl.showRegisterPage) // 请求用户注册页面
 .get('/login', userCtrl.showLoginPage) // 展示登录页面
+.post('/register', userCtrl.registerNewUser) // 注册新用户
 
 module.exports = router;
