@@ -13,6 +13,9 @@ var bodyParser = require('body-parser');
 // 注册 body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// 导入 session 中间件
+var session = require('express-session');
+
 // 指定 express 的默认模板引擎
 app.set('view engine', 'ejs');
 // 指定 模板页面存储路径

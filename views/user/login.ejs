@@ -45,6 +45,29 @@
   </form>
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $('#form').on('submit', function (e) {
+        e.preventDefault();
+
+        // 通过 Ajax 发起用户登录请求
+        $.ajax({
+          url: '/login',
+          data: $(this).serialize(),
+          type: 'post',
+          dataType: 'json',
+          success: function (results) {
+            if (results.err_code === 0) { // 登录成功
+              // 登录成功后跳转到 / 首页
+              location.href = '/';
+            } else {
+              alert(results.msg);
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
