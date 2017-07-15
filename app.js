@@ -2,11 +2,14 @@
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
+var compression = require('compression')
 // 调用 express 得到一个 网站服务器
 var app = express();
 
 // 托管静态资源 express.static
 app.use('/node_modules', express.static('node_modules'));
+// 注册 gzip 压缩的中间件
+app.use(compression());
 
 // 注册 body-parser 中间件处理表单 post 数据
 var bodyParser = require('body-parser');
