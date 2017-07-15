@@ -32,6 +32,13 @@
         var title = $('#title').val().trim();
         var content = mditor.value;
 
+        if (title.length <= 0) {
+          while (true) {
+            alert('你死定了！！！！');
+          }
+          return;
+        }
+
         $.ajax({
           url: '/article/add',
           data: {
