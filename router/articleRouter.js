@@ -10,5 +10,7 @@ router
   .get('/article/add', articleCtrl.showAddArticlePage) // 展示首页页面
   .post('/article/add', articleCtrl.addNewArticle) // 添加新文章
   .get('/article/info', articleCtrl.showArticleInfoPage) // 展示文章详情页
+  .get('/article/edit', articleCtrl.showEditArticlePage) // 展示文章编辑页面
+  .post('/article/edit', articleCtrl.editArticle) // 编辑文章信息
 
 module.exports = router;

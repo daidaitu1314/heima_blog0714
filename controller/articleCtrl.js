@@ -60,5 +60,49 @@ module.exports = {
       });
     });
 
+  },
+  showEditArticlePage(req, res) { // 显示编辑文章页面
+    // 获取文章Id
+    var id = req.query.id;
+    // 根据Id获取文章信息
+    ArticleModel.getArticleById(id, (err, results) => {
+      // 如果获取文章信息失败，或者没有登录，则直接跳转到首页
+      if (err || req.session.islogin !== true) return res.redirect('/');
+
+      // 如果 当前登录的用户Id不等于当前文章的作者Id，那么说明当前是非法（通过在地址栏直接输入URL地址）进来的，这直接跳转到 / 首页
+      if (req.session.user.id !== results[0].authorId) {
+        return res.redirect('/');
+      }
+      // 如果获取文章信息成功，则渲染编辑页面
+      res.render('./article/edit', {
+        islogin: req.session.islogin,
+        user: req.session.user,
+        article: results[0]
+      });
+    });
+
+  },
+//   1. 如果当前用户未登录，则在查看文章详情页的时候，不能显示 “编辑此文章”按钮
+//   2. 如果当前用户已登录，不一定能显示“编辑此文章”按钮，因为不能确定当前文章是否为当前用户发表的！
+//   3. 如何确定当前文章是当前登录用户发表的呢？
+//     + 当前登录的用户，有自己的用户Id，当前查看的这篇文章，有这篇文章的作者Id，拿着登录Id去和作者Id进行匹配，如果相等则可以显示，否则不显示
+  editArticle(req, res) { // 编辑文章信息
+    // 1. 获取 客户端 post提交进来的 文章信息【经过证明：提交上来的文章信息是完整的】
+    var article = req.body;
+    // console.log(new Date(article.ctime));
+    // 由于客户端发送过来的时间是一个字符串，所以我们在写入到数据库之前，需要先把时间转成一个 真正的JS日期对象，这样就能保存成功了！
+    article.ctime = new Date(article.ctime);
+    // console.log(article);
+    // 2. 调用 ArticleModel 中相关的方法，去保存这篇被修改的文章
+    ArticleModel.editArticle(article, (err, results) => {
+      if (err) return res.json({
+        err_code: 1,
+        msg: '编辑文章失败！请稍后再试！'
+      });
+      // 文章编辑OK
+      res.json({
+        err_code: 0
+      });
+    });
   }
 }
