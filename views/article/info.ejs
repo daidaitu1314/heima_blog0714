@@ -3,7 +3,10 @@
   <div class="container-fluid">
     <h1 style="text-align:center;">
       <%= article.title %>
-      <small><a href="/article/edit?id=<%= article.id %>" class="pull-right btn btn-link">编辑此文章</a></small>
+      <% if(islogin && user.id===article.authorId){ %>
+        <small><a href="/article/edit?id=<%= article.id %>" class="pull-right btn btn-link">编辑此文章</a></small>
+      <% } %>
+      
     </h1>
     <p>
       <strong>作者：<%= article.nickname %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
