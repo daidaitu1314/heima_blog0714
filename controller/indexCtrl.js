@@ -2,6 +2,7 @@ var articleModel = require('../model/articleModel.js');
 var moment = require('moment');
 var config = require('../config.js');
 
+// 加载 moment 的本地化语言
 moment.locale('zh-cn');
 
 module.exports = {
