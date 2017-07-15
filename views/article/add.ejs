@@ -1,5 +1,58 @@
 <%- include('../layouts/header.ejs') %>
 
-  <h1>文章添加页</h1>
+  <link rel="stylesheet" type="text/css" href="/node_modules/mditor/dist/css/mditor.min.css">
+  <script src="/node_modules/mditor/dist/js/mditor.min.js"></script>
+
+  <div class="container-fluid">
+    <h1>文章添加页</h1>
+    <hr>
+
+    <form>
+      <div class="form-group">
+        <label for="">文章标题：</label>
+        <input type="text" name="title" class="form-control" max="50" id="title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="">文章内容：</label>
+        <textarea rows="" name="content" class="form-control" id="editor" style="display:none;"></textarea>
+      </div>
+
+      <div class="form-group clearfix">
+        <input type="button" value="发表文章" class="btn btn-primary pull-right" id="btn">
+      </div>
+    </form>
+  </div>
+
+  <script>
+    $(function () {
+      var mditor = Mditor.fromTextarea(document.getElementById('editor'));
+
+      $('#btn').on('click', function () {
+        var title = $('#title').val().trim();
+        var content = mditor.value;
+
+        $.ajax({
+          url: '/article/add',
+          data: {
+            title: title,
+            content: content,
+            authorId: '<%= user.id %>'
+          },
+          type: 'post',
+          dataType: 'json',
+          success: function (results) {
+            // { err_code:1, msg:'消息' }
+            // { err_cocde:0, id:1 }
+            if (results.err_code === 0) {
+              location.href = '/article/info?id=' + results.id;
+            } else {
+              alert(results.msg);
+            }
+          }
+        });
+      });
+    });
+  </script>
 
   <%- include('../layouts/footer.ejs') %>

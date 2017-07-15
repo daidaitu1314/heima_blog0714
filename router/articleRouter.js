@@ -6,6 +6,8 @@ var router = express.Router();
 var articleCtrl = require('../controller/articleCtrl.js');
 
 // 当客户端请求 / 根路径的时候，返回 index 首页
-router.get('/article/add', articleCtrl.showAddArticlePage) // 展示首页页面
+router
+  .get('/article/add', articleCtrl.showAddArticlePage) // 展示首页页面
+  .post('/article/add', articleCtrl.addNewArticle) // 添加新文章
 
 module.exports = router;
