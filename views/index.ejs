@@ -9,7 +9,9 @@
         <li class="list-group-item">
           <span class="badge" style="background-color:#5bc0de;"><strong>发表时间：</strong><%= item.ctime %></span>
           <span class="badge" style="background-color:#f0ad4e;"><strong>作者：</strong><%= item.nickname %></span>
-          <a href="/article/info?id=<%= item.id %>"><%= item.title %></a>
+          <a href="/article/info?id=<%= item.id %>">
+            <%= item.title %>
+          </a>
         </li>
         <% }) %>
     </ul>
@@ -23,17 +25,45 @@
       </a>
         </li>
         <% for(var i = 0; i < totalPage; i++){ %>
-          <li class="<%= nowPage===(i+1)?'active':'' %>"><a href="/?page=<%= (i+1) %>"><%= (i+1) %></a></li>
-        <% } %>
-        <li>
-          <a href="/?page=<%= nowPage===totalPage?totalPage:nowPage+1 %>" aria-label="Next">
+          <li class="<%= nowPage===(i+1)?'active':'' %>">
+            <a href="/?page=<%= (i+1) %>">
+              <%= (i+1) %>
+            </a>
+          </li>
+          <% } %>
+            <li>
+              <a href="/?page=<%= nowPage===totalPage?totalPage:nowPage+1 %>" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
-        </li>
+            </li>
       </ul>
     </nav>
 
   </div>
+
+  <script>
+    $(function () {
+      /* $.ajax({
+        url: '/test',
+        type: 'post',
+        dataType: 'json',
+        success: function (result) {
+          console.log(result);
+        }
+      }); */
+
+
+      $
+        .ajax({
+          url: '/test',
+          type: 'post',
+          dataType: 'json'
+        })
+        .then(function (result) {
+          console.log(result);
+        });
+    });
+  </script>
 
 
   <%- include('./layouts/footer.ejs') %>

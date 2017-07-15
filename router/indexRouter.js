@@ -6,6 +6,8 @@ var router = express.Router();
 var indexCtrl = require('../controller/indexCtrl.js');
 
 // 当客户端请求 / 根路径的时候，返回 index 首页
-router.get('/', indexCtrl.showIndexPage) // 展示首页页面
+router
+  .get('/', indexCtrl.showIndexPage) // 展示首页页面
+  .post('/test', indexCtrl.test);
 
 module.exports = router;

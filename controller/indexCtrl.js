@@ -64,5 +64,13 @@ module.exports = {
         nowPage: nowPage // 当前的页码值
       });
     });
+  },
+  test(req, res) {
+    res.json({
+      name: '彬哥',
+      age: '18',
+      gender: '男',
+      hobby: ['处理Bug', '写代码', '照镜子']
+    });
   }
 }
