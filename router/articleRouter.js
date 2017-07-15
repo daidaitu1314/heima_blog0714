@@ -9,5 +9,6 @@ var articleCtrl = require('../controller/articleCtrl.js');
 router
   .get('/article/add', articleCtrl.showAddArticlePage) // 展示首页页面
   .post('/article/add', articleCtrl.addNewArticle) // 添加新文章
+  .get('/article/info', articleCtrl.showArticleInfoPage) // 展示文章详情页
 
 module.exports = router;

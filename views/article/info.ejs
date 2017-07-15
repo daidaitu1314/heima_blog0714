@@ -1,0 +1,19 @@
+<%- include('../layouts/header.ejs') %>
+
+  <div class="container-fluid">
+    <h1 style="text-align:center;">
+      <%= article.title %>
+      <small><a href="/article/edit?id=<%= article.id %>" class="pull-right btn btn-link">编辑此文章</a></small>
+    </h1>
+    <p>
+      <strong>作者：<%= article.nickname %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong>发表时间：<%= article.ctime %></strong>
+    </p>
+    <hr>
+    
+    <div class="content">
+      <%- article.content %>
+    </div>
+  </div>
+
+  <%- include('../layouts/footer.ejs') %>
